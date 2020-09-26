@@ -3,9 +3,6 @@ require("dotenv").config();
 
 const app = express();
 const bodyParser = require("body-parser");
-const sessionMiddleware = require("./modules/session-middleware");
-
-const passport = require("./strategies/user.strategy");
 
 // Route includes
 
@@ -13,17 +10,8 @@ const passport = require("./strategies/user.strategy");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Passport Session Configuration //
-app.use(sessionMiddleware);
-
-// start up passport sessions
-app.use(passport.initialize());
-app.use(passport.session());
-
 /* Routes */
-
-// Serve static files
-app.use(express.static("build"));
+app.use(express.static("public"));
 
 // App Set //
 const PORT = process.env.PORT || 5000;
